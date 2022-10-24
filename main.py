@@ -4,6 +4,23 @@ import os
 import requests
 from bs4 import BeautifulSoup
 
+# smtplib 用于邮件的发信动作
+import smtplib
+# email 用于构建邮件内容
+from email.mime.text import MIMEText
+# 构建邮件头
+from email.header import Header
+
+# 发信方的信息：发信邮箱，QQ 邮箱授权码
+from_addr = '945332608@qq.com'
+emailpwd = 'ryklxnunxoixbbba'
+# 收信方邮箱
+to_addr = '945332608@qq.com'
+# 发信服务器
+smtp_server = 'smtp.qq.com'
+
+
+
 session = requests.Session()
 users = eval(os.environ['USERS'])
 
@@ -159,6 +176,31 @@ class AutoAgent:
             print(e)
             print('获取登陆页面发生错误，请联系作者: {}'.format(USER))
 
+    def sendEmail(self,autocardres):
+        
+        # 邮箱正文内容，第一个参数为内容，第二个参数为格式(plain 为纯文本)，第三个参数为编码
+        msg = MIMEText(autocardres, 'plain', 'utf-8')
+        # 邮件头信息
+        msg['From'] = Header('zwm')  # 发送者
+        msg['To'] = Header('you')  # 接收者
+        subject = '每日自动打卡结果'
+        msg['Subject'] = Header(subject, 'utf-8')  # 邮件主题
+
+        try:
+            smtpobj = smtplib.SMTP_SSL(smtp_server)
+            # 建立连接--qq邮箱服务和端口号（可百度查询）
+            smtpobj.connect(smtp_server, 465)
+            # 登录--发送者账号和口令
+            smtpobj.login(from_addr, emailpwd)
+            # 发送邮件
+            smtpobj.sendmail(from_addr, to_addr, msg.as_string())
+            print("邮件发送成功")
+        except smtplib.SMTPException:
+            print("无法发送邮件")
+        finally:
+            # 关闭服务器
+            smtpobj.quit()
+        
     # 输入用户名和密码登陆
     def post_login(self, username, password):
         """
@@ -297,6 +339,7 @@ class AutoAgent:
             result = BeautifulSoup(check.text, 'html.parser')
             text_list = result.find(style='display:;').text.split()
             if '感谢您已完成今日表格信息，请明天继续填报。' in text_list:
+                self.sendEmail('你已经完成了今日的填报')
                 print('你已经完成了今日的填报...')
                 return True
             elif '根据校防疫工作要求，请您务必每天上午12点之前完成打卡，并确保“手机定位”功能已经开通，谢谢配合。' in text_list:
