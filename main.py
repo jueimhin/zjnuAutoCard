@@ -339,7 +339,6 @@ class AutoAgent:
             result = BeautifulSoup(check.text, 'html.parser')
             text_list = result.find(style='display:;').text.split()
             if '感谢您已完成今日表格信息，请明天继续填报。' in text_list:
-                self.sendEmail('你已经完成了今日的填报')
                 print('你已经完成了今日的填报...')
                 return True
             elif '根据校防疫工作要求，请您务必每天上午12点之前完成打卡，并确保“手机定位”功能已经开通，谢谢配合。' in text_list:
@@ -357,11 +356,16 @@ class AutoAgent:
         # 2. 账户密码登录获取完整cookie
         if self.post_login(username, password):
             # 3. 校验是否已完成今日打卡
-            if not self.check_submit():
+            if self.check_submit():
+                self.sendEmail(name+' 今日已打卡，请勿重复打卡')
+            else:
                 print('正在打卡...')
                 res = self.submit_info(name, username, loc) and self.check_submit()
                 if res:
+                    self.sendEmail(name+'打卡失败，请尽快手动打卡')
                     print('打卡失败，请手动填报，并联系作者: {}'.format(USER))
+                else:
+                    self.sendEmail(name+'打卡成功！')
 
 
 if __name__ == '__main__':
