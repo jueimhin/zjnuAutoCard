@@ -327,5 +327,6 @@ if __name__ == '__main__':
 
     for person in users:
         real_name, uname, passwd, location = person
+        print(real_name)
         agent.auto_clock(real_name, uname, passwd, location)
         print()
