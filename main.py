@@ -183,7 +183,7 @@ class AutoAgent:
         # 邮件头信息
         msg['From'] = Header('zwm')  # 发送者
         msg['To'] = Header('you')  # 接收者
-        subject = '每日自动打卡结果'
+        subject = 'AutoCard Result'
         msg['Subject'] = Header(subject, 'utf-8')  # 邮件主题
 
         try:
