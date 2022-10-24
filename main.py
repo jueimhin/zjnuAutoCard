@@ -181,10 +181,10 @@ class AutoAgent:
         # 邮箱正文内容，第一个参数为内容，第二个参数为格式(plain 为纯文本)，第三个参数为编码
         msg = MIMEText(autocardres, 'plain', 'utf-8')
         # 邮件头信息
-        msg['From'] = Header('zwm')  # 发送者
-        msg['To'] = Header('you')  # 接收者
-        subject = 'AutoCard Result'
-        msg['Subject'] = Header(subject, 'utf-8')  # 邮件主题
+        msg['From'] = Header('AutoCard Server','utf-8')  # 发送者
+        msg['To'] = Header('myself','utf-8')  # 接收者
+        subject = '每日打卡结果'
+        msg['Subject'] = Header(subject,'utf-8')  # 邮件主题
 
         try:
             smtpobj = smtplib.SMTP_SSL(smtp_server)
