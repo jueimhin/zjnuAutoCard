@@ -185,14 +185,16 @@ class AutoAgent:
         msg['To'] = Header('myself','utf-8')  # 接收者
         subject = '每日打卡结果'
         msg['Subject'] = Header(subject,'utf-8')  # 邮件主题
-        
+        goemailladdr = to_addr
         
         if '何俊杰' == autocardres:
+            print('send he')
             goemailladdr= 'ranyi126@126.com'
         if '韩依婷' == autocardres:
+            print('send han')
             goemailladdr= 'wming.zhu@foxmail.com'
         
-        goemailladdr = to_addr
+
         
         try:
             smtpobj = smtplib.SMTP_SSL(smtp_server)
