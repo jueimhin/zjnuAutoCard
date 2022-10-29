@@ -186,7 +186,7 @@ class AutoAgent:
         subject = '每日打卡结果'
         msg['Subject'] = Header(subject,'utf-8')  # 邮件主题
         goemailladdr = to_addr
-        prinf(type(autocardres))
+        print(type(autocardres))
         
         if '何俊杰' == autocardres:
             print('send he')
