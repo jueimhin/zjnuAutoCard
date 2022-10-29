@@ -189,10 +189,10 @@ class AutoAgent:
         
         if '何俊杰' == autocardres:
             goemailladdr= 'ranyi126@126.com'
-        else if '韩依婷' == autocardres:
+        if '韩依婷' == autocardres:
             goemailladdr= 'wming.zhu@foxmail.com'
-        else :
-            goemailladdr = to_addr
+        
+        goemailladdr = to_addr
         
         try:
             smtpobj = smtplib.SMTP_SSL(smtp_server)
