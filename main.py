@@ -185,11 +185,15 @@ class AutoAgent:
         msg['To'] = Header('myself','utf-8')  # 接收者
         subject = '每日打卡结果'
         msg['Subject'] = Header(subject,'utf-8')  # 邮件主题
+        
+        
         if '何俊杰' == autocardres:
-            self.to_addr= 'ranyi126@126.com'
-        if '韩依婷' == autocardres:
-            self.to_addr= 'wming.zhu@foxmail.com'
-
+            goemailladdr= 'ranyi126@126.com'
+        else if '韩依婷' == autocardres:
+            goemailladdr= 'wming.zhu@foxmail.com'
+        else :
+            goemailladdr = to_addr
+        
         try:
             smtpobj = smtplib.SMTP_SSL(smtp_server)
             # 建立连接--qq邮箱服务和端口号（可百度查询）
@@ -197,7 +201,7 @@ class AutoAgent:
             # 登录--发送者账号和口令
             smtpobj.login(from_addr, emailpwd)
             # 发送邮件
-            smtpobj.sendmail(from_addr, to_addr, msg.as_string())
+            smtpobj.sendmail(from_addr, goemailladdr, msg.as_string())
             print("邮件发送成功")
         except smtplib.SMTPException:
             print("无法发送邮件")
