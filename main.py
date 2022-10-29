@@ -187,11 +187,12 @@ class AutoAgent:
         msg['Subject'] = Header(subject,'utf-8')  # 邮件主题
         goemailladdr = to_addr
         print(type(autocardres))
+        print(autocardres)
         
-        if '何俊杰' == autocardres:
+        if '何俊杰' in autocardres:
             print('send he')
             goemailladdr= 'ranyi126@126.com'
-        if '韩依婷' == autocardres:
+        if '韩依婷' in autocardres:
             print('send han')
             goemailladdr= 'wming.zhu@foxmail.com'
         
