@@ -194,7 +194,7 @@ class AutoAgent:
             goemailladdr= 'ranyi126@126.com'
         if '韩依婷' in autocardres:
             print('send han')
-            goemailladdr= 'hanyiting7102@163.com'
+            goemailladdr= '979628675@qq.com'
         if '胡明超' in autocardres:
             print('send han')
             goemailladdr= '2387790877@qq.com'
