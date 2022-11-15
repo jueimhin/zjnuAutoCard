@@ -15,7 +15,7 @@ from email.header import Header
 from_addr = '945332608@qq.com'
 emailpwd = 'ryklxnunxoixbbba'
 # 收信方邮箱
-to_addr = '945332608@qq.com'
+to_addr = '935947246@qq.com'
 # 发信服务器
 smtp_server = 'smtp.qq.com'
 
@@ -189,15 +189,11 @@ class AutoAgent:
         print(type(autocardres))
         print(autocardres)
         
-        if '何俊杰' in autocardres:
-            print('send he')
-            goemailladdr= 'ranyi126@126.com'
-        if '韩依婷' in autocardres:
-            print('send han')
-            goemailladdr= '979628675@qq.com'
-        if '胡明超' in autocardres:
-            print('send han')
-            goemailladdr= '2387790877@qq.com'
+        if '朱伟铭' in autocardres:
+            print('send me')
+            goemailladdr= '935947246@qq.com'
+        
+      
         
 
         
